@@ -1,6 +1,3 @@
-import express from 'express'; // Import the Express module
-// import { API_KEY } from "./sources/keys.js";
-import app from './app.js';
 
 
 const PORT = 3000;

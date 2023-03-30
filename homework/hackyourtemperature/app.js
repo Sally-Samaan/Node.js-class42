@@ -4,7 +4,7 @@ import { keys } from "./sources/keys.js";
 
 const app = express();
 
-const weatherApi = "https://api.openweathermap.org/data/2.5/weather?";
+const weatherPath = "https://api.openweathermap.org/data/2.5/weather";
 
 app.use(express.json());
 
@@ -18,7 +18,7 @@ app.post("/weather", async (req, res) => {
   };
 
   const response = await fetch(
-    `${weatherApi}q=${weather.cityName}&units=metric&APPID=${keys.API_KEY}`
+    `${weatherPath}q=${weather.cityName}&units=metric&APPID=${keys.API_KEY}`
     );
     const data = await response.json();
   

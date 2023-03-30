@@ -1,22 +1,25 @@
 import request from 'supertest';
 import app from './app';
 
+
+const testRequest = request(app);
+
 describe('GET /', () => {
   test('should respond with "Hello from backend to frontend"', async () => {
-    const response = await request(app).get('/');
+    const response = await testRequest.get('/');
     expect(response.status).toBe(200);
     expect(response.text).toBe('Hello from backend to frontend');
   });
 
   test('should respond with error message', async () => {
-    const response = await request(app).get('/unKnownPath');
+    const response = await testRequest.get('/unKnownPath');
     expect(response.status).toBe(404);
   });
 });
 
 describe('POST /weather', () => {
   test('should respond with a success message if the city is found', async () => {
-    const response = await request(app)
+    const response = await testRequest
       .post('/weather')
       .send({ cityName: 'London' });
     expect(response.status).toBe(200);
@@ -24,7 +27,7 @@ describe('POST /weather', () => {
   });
 
   test('should respond with an error message if the city is not found', async () => {
-    const response = await request(app)
+    const response = await testRequest
       .post('/weather')
       .send({ cityName: 'NonExistentCity' });
     expect(response.status).toBe(404);
